@@ -34,9 +34,9 @@
 
 
 #### [3. Results](#3-Results)  
-&nbsp;&nbsp; [3-1. PCA 모델 구현](#-PCA-모델-구현)  
+&nbsp;&nbsp; [3-1. 코드 구조](#-코드-구조)  
 
-&nbsp;&nbsp; [3-2. 코드 구조](#-코드-구조)  
+&nbsp;&nbsp; [3-2. PCA 모델 구현](#-PCA-모델-구현)  
 
 &nbsp;&nbsp; [3-3. 실행 화면](#-실행-화면)  
 
@@ -252,6 +252,7 @@ PC1과 PC2를 각각 x축(u)과 y축(v)으로 잡으면, **모든 TLX 입력값�
 
 ### ◈ LLM 연동 & 조언 생성
 
+<br>
 
 1️⃣ **환경변수 설정** <br>
 
@@ -259,9 +260,8 @@ OpenAI API를 사용하기 위해 API Key를 발급받아 환경변수에 저장
 
 서버 실행 시 이 환경변수를 읽어와 WebClient 초기화에 사용함 <br>
 
-&nbsp; ৹ OPENAI_API_KEY : 인증 토큰 <br>
-
-&nbsp; ৹ OPENAI_MODEL : gpt-4o-mini <br>
+৹ OPENAI_API_KEY : 인증 토큰 <br>
+৹ OPENAI_MODEL : gpt-4o-mini <br>
 
 <br>
 
@@ -285,3 +285,10 @@ LLM Service 클래스에서 OpenAI API 엔드포인트로 요청을 전송함 <b
 
 프론트엔드는 응답에서 LLM이 생성한 짧은 행동 지침 (advice)을 받아 표시함 <br>
 
+<br><br>
+
+## 3. Results
+
+<br>
+
+sdsd
