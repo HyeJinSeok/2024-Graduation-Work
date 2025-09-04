@@ -185,6 +185,7 @@ PCA의 원리는 <strong>"PC1과 PC2만으로도 데이터의 큰 흐름을 이�
 
 ### 1️⃣ 주성분 (PC1, PC2) 설정하기
 
+
 NASA-TLX의 6가지 항목들은 서로 독립적이라기보다는 **서로 상관된 축**을 가진다고 볼 수 있음. 예를 들면 <br>
 ```
 ⇒ Effort 항목과 Mental 항목은 일반적으로 같이 높아지거나 같이 낮아지는 경향이 있음 
@@ -199,7 +200,7 @@ NASA-TLX의 6가지 항목들은 서로 독립적이라기보다는 **서로 상
 한편, PC2를 선정하기 위해선 PC1과 독립되는 (=PC1과 직교하는) 변동 요인을 찾아야 함. 예를 들면 <br>
 
 ```
-⇒ Physical 항목과 Temporal 항목은 PC1 요인과는 **덜 상관된 축**으로 움직이는 경향이 있음 
+⇒ Physical 항목과 Temporal 항목은 PC1 요인과는 덜 상관된 축으로 움직이는 경향이 있음 
 
 ⇒ Physical 및 Temporal 부하가 높다고해서, 인지적·정신적 부하가 항상 높은 것은 아님 
 ```
@@ -211,6 +212,7 @@ NASA-TLX의 6가지 항목들은 서로 독립적이라기보다는 **서로 상
 <br>
 
 ### 2️⃣ (u, v) 좌표와 사분면 정의하기
+
 
 PC1과 PC2를 각각 x축(u)과 y축(v)으로 잡으면, **모든 TLX 입력값은 PCA 적용시 2차원 좌표 (u, v)로 투영**됨 <br>
 
@@ -230,7 +232,7 @@ PC1과 PC2를 각각 x축(u)과 y축(v)으로 잡으면, **모든 TLX 입력값�
 &nbsp; ৹ 두 축 모두 낮아 전반적인 부담이 적은 상태 <br>
 &nbsp; ৹ 현재 컨디션 유지에 적합하지만, 경우에 따라 몰입을 위한 동기 부여가 필요할 수 있는 상황 <br><br>
 • Q4 (u ≥ 0, v < 0) <br>
-&nbsp; ৹ 인지적/정신적 부하는 높은데 물리·시간 압박은 낮은 상태 <br>
+&nbsp; ৹ 인지적/정신적 부하는 높은데, 물리·시간 압박은 낮은 상태 <br>
 &nbsp; ৹ 작업 리듬과 환경을 정돈하면서 집중을 효율적으로 분산시키는 전략이 유효한 상황
 
 <br>
@@ -244,8 +246,42 @@ PC1과 PC2를 각각 x축(u)과 y축(v)으로 잡으면, **모든 TLX 입력값�
 
 <br>
 
-<img src="./images/tlx_process.png" width="950" alt="tlx 과정" />
+<img src="./images/tlx_process.png" width="1000" alt="tlx 과정" />
 
 <br>
 
 ### ◈ LLM 연동 & 조언 생성
+
+
+1️⃣ **환경변수 설정** <br>
+
+OpenAI API를 사용하기 위해 API Key를 발급받아 환경변수에 저장해야 함 <br>
+
+서버 실행 시 이 환경변수를 읽어와 WebClient 초기화에 사용함 <br>
+
+&nbsp; ৹ OPENAI_API_KEY : 인증 토큰 <br>
+
+&nbsp; ৹ OPENAI_MODEL : gpt-4o-mini <br>
+
+<br>
+
+2️⃣ **프롬프트 구성** <br>
+
+<img src="./images/prompt.png" width="900" alt="tlx 과정" />
+
+<br>
+
+3️⃣ **LLM API 호출** <br>
+
+LLM Service 클래스에서 OpenAI API 엔드포인트로 요청을 전송함 <br>
+
+응답 JSON에서 choices[0].message.content 부분을 파싱하여 조언 텍스트만 추출함 <br>
+
+호출 실패나 Rate Limit 발생 시, 기본 에러 메시지나 쿨다운 안내를 반환하도록 구현함 <br>
+
+<br>
+
+4️⃣ **조언 결과 활용** <br>
+
+프론트엔드는 응답에서 LLM이 생성한 짧은 행동 지침 (advice)을 받아 표시함 <br>
+
