@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8" />
+    <title>PlanOptima</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- 디자인 토큰/스타일 -->
+    <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+<div class="wrap">
+    <!-- 헤더 영역 -->
+    <header class="header">
+        <h1>PlanOptima</h1>
+        <!-- 소개 문구 -->
+        <p class="lead">
+            작업 유형을 선택한 뒤, 아래 6가지 작업 부하(정신, 신체, 시간압박, 성과, 노력, 좌절)를
+            0–100 범위로 설정하세요. <br> PCA 결과에 따라 상황에 맞는 조언을 제공합니다.
+        </p>
+    </header>
+
+    <!-- 작업 유형 선택 -->
+    <section aria-label="작업 유형 선택" class="section">
+        <h2 class="section-head">작업 유형 선택</h2>
+        <div id="taskCards" class="grid"></div>
+    </section>
+
+    <!-- TLX 평가(슬라이더) -->
+    <section aria-label="작업 메트릭 설정" class="section">
+        <h2 class="section-head">TLX 평가</h2>
+        <p class="hint">각 항목을 0 (전혀 없음) ~ 100 (매우 높음)으로 조정하세요.</p>
+        <div id="sliders" class="sliders"></div>
+    </section>
+
+    <!-- 액션 버튼 영역 -->
+    <section class="section actions" aria-label="실행">
+        <button id="btnAnalyze">분석</button>
+        <button id="btnCoach">조언</button>
+    </section>
+
+    <!-- 분석 결과 (좌: 요약+조언 / 우: 사분면) -->
+    <section class="section result-grid" aria-label="분석 결과">
+        <!-- 좌측: 요약 + LLM 조언 -->
+        <div class="panel">
+            <div class="kv">
+                <div class="section-title">TLX 결과</div>
+                <div>선택 작업</div><div id="taskLabel">-</div>
+                <div>TLX 평균</div><div id="tlx">-</div>
+                <div>Stress</div><div id="stress">-</div>
+            </div>
+
+            <hr class="sep" />
+
+            <div class="advice">
+                <div class="section-title">LLM 조언</div>
+                <pre id="advice" class="mono prebox" style="min-height:120px"></pre>
+            </div>
+        </div>
+
+        <!-- 우측: 사분면 플롯 -->
+        <div class="panel quad-card">
+            <div class="section-title">PCA 사분면</div>
+            <div id="quadPlot" class="quad-plot" aria-label="PCA 사분면 플롯"></div>
+
+            <div class="quad-meta">
+                <div>PC1 (u): <b id="uvU">-</b></div>
+                <div>PC2 (v): <b id="uvV">-</b></div>
+                <div>톤: <b id="tone">-</b></div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- 앱 스크립트 -->
+<script type="module" src="/js/app.js"></script>
+</body>
+</html>

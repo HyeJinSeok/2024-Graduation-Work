@@ -1,0 +1,283 @@
+/* ============================================================================
+   디자인 토큰 (라이트 테마, 대비 강화)
+   ========================================================================== */
+:root{
+    /* 배경/표면/텍스트 */
+    --bg:        #f4f7fb;
+    --surface:   #ffffff;
+    --ink:       #0b1220;
+    --muted:     #55627a;
+
+    /* 포커스/강조 색상 (WCAG 대비 확보) */
+    --pri:       #2563eb;
+    --pri-700:   #1e4fd1;
+    --pri-050:   #eaf1ff;
+
+    /* 구분선/테두리 */
+    --line:      #d7dde8;
+
+    /* 간격 스케일 */
+    --space-1: 8px;
+    --space-2: 12px;
+    --space-3: 16px;
+    --space-4: 20px;
+    --space-5: 28px;
+    --space-6: 36px;
+
+    /* 라운드/쉐도우 */
+    --radius-1: 10px;
+    --radius-2: 12px;
+    --shadow-1: 0 8px 20px rgba(11,18,32,.08);
+}
+
+/* ============================================================================
+   기본 문서 스타일
+   ========================================================================== */
+*{ box-sizing: border-box; }
+body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font:16px/1.65 system-ui,-apple-system,Segoe UI,Roboto,Apple SD Gothic Neo,Noto Sans KR; /* CHANGED (14→16, line-height 상향) */
+}
+.wrap{
+    max-width: 1040px;
+    margin: var(--space-6) auto;
+    padding: 0 var(--space-3);
+}
+.header h1{
+    margin: 0 0 var(--space-3);
+    font-size: 26px;             /* CHANGED (22→26) */
+    font-weight: 800;
+    letter-spacing: .2px;
+    color: var(--ink);
+}
+
+/* 섹션 간 간격을 확실히 */
+.section { margin-top: var(--space-5); }
+
+/* 안내/힌트 텍스트 */
+.hint { color: var(--muted); font-size: 15px; } /* CHANGED */
+
+/* ============================================================================
+   작업 카드 그리드
+   ========================================================================== */
+.grid{
+    display: grid;
+    grid-template-columns: repeat(5, minmax(150px, 1fr)); /* CHANGED (카드 기준폭 ↑) */
+    gap: var(--space-3);
+}
+.card{
+    appearance: none;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    color: var(--ink);
+    border-radius: var(--radius-2);
+    padding: calc(var(--space-3) + 2px);        /* CHANGED */
+    text-align: center;
+    cursor: pointer;
+    font-weight: 800;                            /* CHANGED */
+    font-size: 16px;                             /* CHANGED */
+    transition: transform .08s ease, border-color .2s, box-shadow .2s, background .2s;
+    box-shadow: var(--shadow-1);
+}
+.card:hover{
+    transform: translateY(-1px);
+    border-color: color-mix(in srgb, var(--pri) 40%, var(--line));
+    background: var(--pri-050);
+}
+.card.active{
+    border-color: var(--pri);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--pri) 28%, transparent), var(--shadow-1);
+    background: var(--pri-050);
+}
+
+/* ============================================================================
+   슬라이더 영역 (행 간격↑, 요소 간격↑)
+   ========================================================================== */
+.sliders{
+    display: grid;
+    gap: var(--space-3);
+}
+.row{
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-2);
+    padding: calc(var(--space-3) + 2px);        /* CHANGED */
+    display: grid;
+    grid-template-columns: 200px 1fr 72px;      /* CHANGED (라벨/값 칸 더 넓게) */
+    gap: var(--space-3);
+    align-items: center;
+    box-shadow: var(--shadow-1);
+    min-height: 72px;                            /* CHANGED (터치 타겟↑) */
+}
+
+/* 라벨/값 상자 */
+.row > label{
+    color: var(--ink);
+    font-weight: 800;                            /* CHANGED */
+    font-size: 16px;                             /* CHANGED */
+}
+.row > .out{
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    color: var(--ink);
+    opacity: .95;                                /* CHANGED */
+    font-size: 16px;                             /* CHANGED */
+}
+
+/* range 커스텀 (라이트 톤 대비↑) */
+input[type="range"]{
+    width: 100%;
+    height: 10px;                                /* CHANGED (8→10) */
+    background: #e1e7f2;
+    border-radius: 999px;
+    outline: none;
+    appearance: none;
+    border: 1px solid #d1d9e6;
+}
+input[type="range"]::-webkit-slider-thumb{
+    appearance: none;
+    width: 20px; height: 20px;                   /* CHANGED (18→20) */
+    border-radius: 50%;
+    background: var(--pri);
+    border: 2px solid #ffffff;
+    box-shadow: 0 2px 6px rgba(37,99,235,.35);
+    transition: transform .06s ease, background .2s;
+}
+input[type="range"]:active::-webkit-slider-thumb{ transform: scale(1.06); } /* CHANGED */
+
+/* ============================================================================
+   버튼/액션 (명도/대비↑ + 크기/길이↑)
+   ========================================================================== */
+.actions{
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin: var(--space-4) 0 var(--space-3);
+    flex-wrap: wrap;
+}
+button{
+    background: var(--pri);
+    color: #ffffff;
+    border: 1px solid color-mix(in srgb, var(--pri) 25%, #1a2a4a);
+    padding: 14px 24px;                          /* CHANGED (11x18 → 14x24) */
+    min-width: 200px;                            /* CHANGED: 더 길게 */
+    border-radius: 14px;                         /* CHANGED (radius↑) */
+    font-weight: 800;
+    font-size: 16px;                             /* CHANGED */
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: 0 10px 22px rgba(37,99,235,.22); /* CHANGED */
+    transition: transform .08s ease, background .2s, box-shadow .2s;
+}
+button:hover{
+    background: var(--pri-700);
+    transform: translateY(-1px);
+    box-shadow: 0 12px 26px rgba(30,79,209,.28);
+}
+button:disabled{
+    opacity:.6; cursor: not-allowed; transform:none;
+}
+
+/* ============================================================================
+   패널/프리뷰 (화이트 + 섀도우, 구분선 밝게)
+   ========================================================================== */
+.panel{
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-2);
+    padding: var(--space-4);
+    box-shadow: var(--shadow-1);
+}
+.section-title{
+    margin: 0 0 var(--space-2);
+    font-size: 17px;          /* CHANGED (15→17) */
+    font-weight: 800;
+    color: var(--ink);
+}
+
+/* key-value 그리드 */
+.kv{
+    display: grid;
+    grid-template-columns: 200px 1fr; /* CHANGED */
+    gap: var(--space-2) var(--space-3);
+    font-size: 16px;                  /* CHANGED */
+}
+
+/* 코드/프롬프트 박스 */
+.mono{ font-family: ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; }
+.prebox{
+    white-space: pre-wrap;
+    background: #f7f9ff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-2);
+    padding: var(--space-3);
+    min-height: 96px;
+    margin-top: var(--space-2);
+    color: #0b1220;
+    font-size: 15px;                 /* CHANGED */
+}
+
+/* ============================================================================
+   반응형 (작은 화면 가독성↑)
+   ========================================================================== */
+@media (max-width: 720px){
+    .grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); } /* 카드 2열 */
+    .row{ grid-template-columns: 120px 1fr 56px; min-height: 64px; }
+    button{ width: 100%; min-width: unset; } /* 모바일은 버튼 꽉 차게 */
+    .kv{ grid-template-columns: 1fr; }
+}
+
+/* 결과 영역 2열 레이아웃 */
+.result-grid{
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: var(--space-3);
+}
+
+.quad-card { display: grid; gap: var(--space-2); align-content: start; }
+.quad-plot { width: 100%; height: 260px; }
+.quad-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 12px; font-size: 15px; }
+
+@media (max-width: 900px){
+    .result-grid{ grid-template-columns: 1fr; }
+    .quad-plot{ height: 240px; }
+}
+
+/* 결과 영역 2열: 오른쪽 사분면 넓게 */
+.result-grid{
+    display: grid;
+    grid-template-columns: 1fr 520px;   /* ← 우측 폭 키움 */
+    gap: var(--space-3);
+}
+
+/* 구분선 */
+.sep {
+    margin: var(--space-3) 0 var(--space-2);
+    border: 0;
+    border-top: 1px solid var(--line);
+}
+
+/* 사분면 카드 */
+.quad-card { display: grid; gap: var(--space-2); align-content: start; }
+
+/* 사분면은 정사각형으로 크게, 컨테이너 폭에 맞춰 자동 확장 */
+.quad-plot {
+    width: 100%;
+    aspect-ratio: 1 / 1;     /* 정사각형 */
+    min-height: 380px;        /* 기본 큼직하게 */
+}
+
+/* 메타 텍스트 */
+.quad-meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 12px;
+    font-size: 15px;
+}
+
+@media (max-width: 1024px){
+    .result-grid{ grid-template-columns: 1fr; }
+    .quad-plot{ min-height: 320px; }
+}
