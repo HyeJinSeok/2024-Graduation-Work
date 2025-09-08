@@ -180,6 +180,7 @@ PCA의 원리는 <strong>"PC1과 PC2만으로도 데이터의 큰 흐름을 이�
     <summary>
       <h1>2.&thinsp; Implementation</h1>
       <img src="./images/title_line.png" width="1000" alt="." align="top"/>
+      &thinsp;      
     </summary>
   </ul>
 </div>
@@ -193,7 +194,6 @@ PCA의 원리는 <strong>"PC1과 PC2만으로도 데이터의 큰 흐름을 이�
 
 ## 2-2.&thinsp; PCA 모델 설계
 
-<br>
 
 ### 1️⃣ 주성분 (PC1, PC2) 설정하기
 
@@ -207,7 +207,8 @@ NASA-TLX의 6가지 항목들은 서로 독립적이라기보다는 **서로 상
 
 따라서 이런한 공통된 변동을 가장 폭넓게 설명할 수 있는 축을 주성분(PC1)이라 정의할 수 있음 <br>
 
-즉 **"PC1 = 인지적 · 정신적 부하와 관련된 총합 축”** <br><br>
+즉 **"PC1 = 인지적 · 정신적 부하와 관련된 총합 축”** <br>
+
 
 한편, PC2를 선정하기 위해선 PC1과 독립되는 (=PC1과 직교하는) 변동 요인을 찾아야 함. 예를 들면 <br>
 
@@ -276,13 +277,12 @@ OpenAI API를 사용하기 위해 API Key를 발급받아 환경변수에 저장
 ৹ OPENAI_API_KEY : 인증 토큰 <br>
 ৹ OPENAI_MODEL : gpt-4o-mini <br>
 ```
-<br>
+
 
 ### 2️⃣ 프롬프트 구성
 
 <img src="./images/prompt.png" width="900" alt="프롬프트" />
 
-<br>
 
 ### 3️⃣ LLM API 호출 
 
@@ -292,20 +292,26 @@ LLM Service 클래스에서 OpenAI API 엔드포인트로 요청을 전송함 <b
 
 호출 실패나 Rate Limit 발생 시, 기본 에러 메시지나 쿨다운 안내를 반환하도록 구현함 <br>
 
-<br>
 
 ### 4️⃣ 조언 결과 활용
 
 프론트엔드는 응답에서 LLM이 생성한 짧은 행동 지침 (advice)을 받아 표시함 <br>
 
-<br><br>
-
-## 3.&thinsp; Results
-
 <br>
 
-### 3-1.&thinsp; 코드 구조
-<br>
+<div id="user-content-toc">
+  <ul style="list-style: none;">
+    <summary>
+      <h1>3.&thinsp; Results</h1>
+      <img src="./images/title_line.png" width="1000" alt="." align="top"/>
+      &thinsp;
+    </summary>
+  </ul>
+</div>
+
+
+## 3-1.&thinsp; 코드 구조
+
 
 **< 디렉터리 구조도 >**
 
@@ -321,7 +327,7 @@ LLM Service 클래스에서 OpenAI API 엔드포인트로 요청을 전송함 <b
 
 <br>
 
-### 3-2.&thinsp; PCA 모델 구현
+## 3-2.&thinsp; PCA 모델 구현
 
 scikit-learn의 PCA 라이브러리를 활용하기 위해 **Python** 기반의 주피터 노트북(PCA.ipynb)을 작성함 <br>
 
