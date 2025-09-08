@@ -183,7 +183,6 @@ PCA의 원리는 <strong>"PC1과 PC2만으로도 데이터의 큰 흐름을 이�
 
 ### ◈ PCA 모델 설계
 
-<br>
 
 ### 1️⃣ 주성분 (PC1, PC2) 설정하기
 
@@ -327,7 +326,7 @@ scikit-learn의 PCA 라이브러리를 활용하기 위해 **Python** 기반의 
 ```
 1. 합성 데이터 생성
 
-NASA-TLX 6축(mental, physical, temporal, performance, effort, frustration)을 기반으로 한 합성 데이터를 생성함
+NASA-TLX 6축을 기반으로 한 합성 데이터를 생성함
 
 일부 샘플에는 '시간 압박·노력 증가' 패턴과 '좌절·성과 압박 증가' 패턴을 섞어 실제 TLX 분포와 유사하게 설계함
 
@@ -341,9 +340,9 @@ NASA-TLX 6축(mental, physical, temporal, performance, effort, frustration)을 �
 
 3. 표준화 및 PCA 학습
 
-각 축을 평균(mu)과 표준편차(sigma)로 표준화하여 분산을 맞춘 뒤, scikit-learn의 PCA를 적용해 8차원을 2차원으로 축소함
+각 축을 평균(mu)과 표준편차(sigma)로 표준화해 분산을 맞춘 뒤, PCA를 적용해 8차원을 2차원으로 축소함
 
-PC1은 전반적 부담(tlx_mean)과 양(+) 상관, PC2는 시간·물리적 압박 축과 양(+) 상관이 되도록 부호를 의도적으로 정렬함
+PC1은 전반적 부담(tlx_mean)과 양(+) 상관, PC2는 시간·물리적 압박 축과 양(+) 상관이 되도록 부호를 정렬함
 
 
 4. 모델 파라미터 산출
@@ -359,3 +358,31 @@ PCA 학습 결과에서 평균(mu), 표준편차(sigma), 주성분 행렬(W)을 
 
 서버 측 분석 모듈은 이 JSON을 로드하여 사용자의 TLX 입력을 (u, v) 좌표로 변환할 수 있음
 ```
+
+<br>
+
+## ◈ OpenAI API 연동
+
+OpenAI API를 사용하기 위해서는 **ChatGPT 유료 구독과 완전히 별개로**, 별도의 요금제를 끊어야 함 <br>
+
+[ 🔗 OpenAI API 공식 페이지 바로가기](https://openai.com/ko-KR/index/openai-api/) 
+
+<img src="./images/openai.png" width="1000" alt="openai_API" />
+
+<br>
+
+<img src="./images/openai2.png" width="1000" alt="openai_API" />
+
+<br><br>
+
+API 키를 코드에 직접 작성하지 않고, **IntelliJ IDEA 실행 환경**에 환경변수로 등록함
+
+<img src="./images/intelli.png" width="600" alt="intelliJ" />
+
+<br>
+
+<img src="./images/intelli2.png" width="600" alt="intelliJ2" />
+
+<br>
+
+### ◈ 실행 화면
