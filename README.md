@@ -44,11 +44,11 @@
 
 <br>
 
-## 1. Introduction
+# 1. Introduction
 
 <br>
 
-### ◈ 기획 배경
+## ◈ 기획 배경
 
 <strong>인공지능(AI)</strong>이 기존의 컴퓨터공학과 비교했을 때 가장 두드러지는 차별점은 **정성적 신호를 정량화할 수 있다**라고 보았습니다. <br>
 
@@ -58,7 +58,7 @@
 
 <br>
 
-### ◈ 설계 개요
+## ◈ 설계 개요
 
 ```
 1) 어떤 주관 입력을 받을 것인가 
@@ -76,7 +76,7 @@
 
 <br>
 
-### ◈ NASA TLX (Task Load Index)
+## ◈ NASA TLX (Task Load Index)
 
 미국항공우주국(NASA)은 '비행사의 자동/수동 조종 간 부담 차이'를 비교하기 위해 <strong>작업 부하 지수(TLX)</strong>를 개발함 <br>
 
@@ -118,7 +118,7 @@
 
 <br>
 
-### ◈ PCA (Principal Component Analysis)
+## ◈ PCA (Principal Component Analysis)
 
 주성분 분석(PCA)은 다차원 데이터의 차원을 축소시키면서, 데이터의 중요한 정보를 최대한 보존하는 통계 기법. <br>
 
@@ -151,7 +151,7 @@ PCA의 원리는 <strong>"PC1과 PC2만으로도 데이터의 큰 흐름을 이�
 
 <br>
 
-### ◈ LLM (Large Language Model)
+## ◈ LLM (Large Language Model)
 
 대규모 언어 모델(LLM)은 방대한 텍스트 데이터로 학습된 AI 모델로 ChatGPT, Claude 등이 대표적인 예. <br> 
 
@@ -172,16 +172,16 @@ PCA의 원리는 <strong>"PC1과 PC2만으로도 데이터의 큰 흐름을 이�
 
 <br><br>
 
-## 2. Implementation
+# 2. Implementation
 
 <br>
 
-### ◈ 구현 요약
+## ◈ 구현 요약
 
 <img src="./images/summary.png" width="800" alt="구현 요약" />
 
 
-### ◈ PCA 모델 설계
+## ◈ PCA 모델 설계
 
 
 ### 1️⃣ 주성분 (PC1, PC2) 설정하기
@@ -243,7 +243,7 @@ PC1과 PC2를 각각 x축(u)과 y축(v)으로 잡으면, **모든 TLX 입력값�
 
 <br>
 
-### ◈ TLX 입력 & 처리
+## ◈ TLX 입력 & 처리
 
 <br>
 
@@ -251,7 +251,7 @@ PC1과 PC2를 각각 x축(u)과 y축(v)으로 잡으면, **모든 TLX 입력값�
 
 <br>
 
-### ◈ LLM 연동 & 조언 생성
+## ◈ LLM 연동 & 조언 생성
 
 <br>
 
