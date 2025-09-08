@@ -12,35 +12,26 @@
 
 ### - 목차 -
 
-#### [1. Introduction](#1-Introduction)  
-&nbsp;&nbsp; [1-1. 기획 배경](#-기획-배경)  
-
-&nbsp;&nbsp; [1-2. 설계 개요](#-설계-개요)  
-
-&nbsp;&nbsp; [1-3. NASA TLX (Task Load Index)](#-nasa-tlx-task-load-index)  
-
-&nbsp;&nbsp; [1-4. PCA (Principal Component Analysis)](#-pca-principal-component-analysis)  
-
-&nbsp;&nbsp; [1-5. LLM (Large Language Model)](#-llm-large-language-model)
-
-#### [2. Implementation](#2-Implementation)  
-&nbsp;&nbsp; [2-1. 구현 요약](#-구현-요약)  
-
-&nbsp;&nbsp; [2-2. PCA 모델 설계](#-pca-모델-설계)  
-
-&nbsp;&nbsp; [2-3. TLX 입력 & 처리](#-TLX-입력-&-처리)  
-
-&nbsp;&nbsp; [2-4. LLM 연동 & 조언 생성](#-llm-연동-&-조언-생성)  
+#### [1. Introduction](#1-introduction)  
+&nbsp;&nbsp; [1-1. 기획 배경](#1-1-기획-배경)  
+&nbsp;&nbsp; [1-2. 설계 개요](#1-2-설계-개요)  
+&nbsp;&nbsp; [1-3. NASA TLX (Task Load Index)](#1-3-nasa-tlx-task-load-index)  
+&nbsp;&nbsp; [1-4. PCA (Principal Component Analysis)](#1-4-pca-principal-component-analysis)  
+&nbsp;&nbsp; [1-5. LLM (Large Language Model)](#1-5-llm-large-language-model)  
 
 
-#### [3. Results](#3-Results)  
-&nbsp;&nbsp; [3-1. 코드 구조](#-코드-구조)  
+#### [2. Implementation](#2-implementation)  
+&nbsp;&nbsp; [2-1. 구현 요약](#2-1-구현-요약)  
+&nbsp;&nbsp; [2-2. PCA 모델 설계](#2-2-pca-모델-설계)  
+&nbsp;&nbsp; [2-3. TLX 입력 & 처리](#2-3-tlx-입력--처리)  
+&nbsp;&nbsp; [2-4. LLM 연동 & 조언 생성](#2-4-llm-연동--조언-생성)  
 
-&nbsp;&nbsp; [3-2. PCA 모델 구현](#-PCA-모델-구현)  
 
-&nbsp;&nbsp; [3-3. OpenAI API 연동](#-OpenAI-API-연동)
-
-&nbsp;&nbsp; [3-4. 실행 화면](#-실행-화면)  
+#### [3. Results](#3-results)  
+&nbsp;&nbsp; [3-1. 코드 구조](#3-1-코드-구조)  
+&nbsp;&nbsp; [3-2. PCA 모델 구현](#3-2-pca-모델-구현)  
+&nbsp;&nbsp; [3-3. OpenAI API 연동](#3-3-openai-api-연동)  
+&nbsp;&nbsp; [3-4. 실행 화면](#3-4-실행-화면)  
 
 <br>
 
@@ -53,10 +44,9 @@
   </ul>
 </div>
 
-<br>
 
-## ◈ 기획 배경
-<br>
+## 1-1. 기획 배경
+
 
 <strong>인공지능(AI)</strong>이 기존의 컴퓨터공학과 비교했을 때 가장 두드러지는 차별점은 **정성적 신호를 정량화할 수 있다**라고 보았습니다. <br>
 
@@ -66,7 +56,8 @@
 
 <br>
 
-## ◈ 설계 개요
+## 1-2. 설계 개요
+
 
 ```
 1) 어떤 주관 입력을 받을 것인가 
@@ -84,7 +75,8 @@
 
 <br>
 
-## ◈ NASA TLX (Task Load Index)
+## 1-3. NASA TLX (Task Load Index)
+
 
 미국항공우주국(NASA)은 '비행사의 자동/수동 조종 간 부담 차이'를 비교하기 위해 <strong>작업 부하 지수(TLX)</strong>를 개발함 <br>
 
@@ -126,7 +118,8 @@
 
 <br>
 
-## ◈ PCA (Principal Component Analysis)
+## 1-4. PCA (Principal Component Analysis)
+
 
 주성분 분석(PCA)은 다차원 데이터의 차원을 축소시키면서, 데이터의 중요한 정보를 최대한 보존하는 통계 기법. <br>
 
@@ -159,7 +152,8 @@ PCA의 원리는 <strong>"PC1과 PC2만으로도 데이터의 큰 흐름을 이�
 
 <br>
 
-## ◈ LLM (Large Language Model)
+## 1-5. LLM (Large Language Model)
+
 
 대규모 언어 모델(LLM)은 방대한 텍스트 데이터로 학습된 AI 모델로 ChatGPT, Claude 등이 대표적인 예. <br> 
 
@@ -180,16 +174,22 @@ PCA의 원리는 <strong>"PC1과 PC2만으로도 데이터의 큰 흐름을 이�
 
 <br><br>
 
-# 2. Implementation
+<div id="user-content-toc">
+  <ul style="list-style: none;">
+    <summary>
+      <h1>2. Implementation</h1>
+      <img src="./images/title_line.png" width="1000" alt="." align="top"/>
+    </summary>
+  </ul>
+</div>
 
-<br>
 
-## ◈ 구현 요약
+## 2-1. 구현 요약
 
 <img src="./images/summary.png" width="800" alt="구현 요약" />
 
 
-## ◈ PCA 모델 설계
+## 2-2. PCA 모델 설계
 
 
 ### 1️⃣ 주성분 (PC1, PC2) 설정하기
@@ -251,7 +251,7 @@ PC1과 PC2를 각각 x축(u)과 y축(v)으로 잡으면, **모든 TLX 입력값�
 
 <br>
 
-## ◈ TLX 입력 & 처리
+## 2-3. TLX 입력 & 처리
 
 <br>
 
@@ -259,7 +259,7 @@ PC1과 PC2를 각각 x축(u)과 y축(v)으로 잡으면, **모든 TLX 입력값�
 
 <br>
 
-## ◈ LLM 연동 & 조언 생성
+## 2-4. LLM 연동 & 조언 생성
 
 <br>
 
@@ -301,7 +301,7 @@ LLM Service 클래스에서 OpenAI API 엔드포인트로 요청을 전송함 <b
 
 <br>
 
-### ◈ 코드 구조
+### 3-1. 코드 구조
 <br>
 
 **< 디렉터리 구조도 >**
@@ -318,7 +318,7 @@ LLM Service 클래스에서 OpenAI API 엔드포인트로 요청을 전송함 <b
 
 <br>
 
-### ◈ PCA 모델 구현
+### 3-2. PCA 모델 구현
 
 scikit-learn의 PCA 라이브러리를 활용하기 위해 **Python** 기반의 주피터 노트북(PCA.ipynb)을 작성함 <br>
 
@@ -369,7 +369,7 @@ PCA 학습 결과에서 평균(mu), 표준편차(sigma), 주성분 행렬(W)을 
 
 <br>
 
-## ◈ OpenAI API 연동
+## 3-3. OpenAI API 연동
 
 OpenAI API를 사용하기 위해서는 **ChatGPT 유료 구독과 완전히 별개로**, 별도의 요금제를 끊어야 함 <br>
 
@@ -393,4 +393,4 @@ API 키를 코드에 직접 작성하지 않고, **IntelliJ IDEA 실행 환경**
 
 <br>
 
-### ◈ 실행 화면
+### 3-4. 실행 화면
