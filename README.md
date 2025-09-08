@@ -38,7 +38,9 @@
 
 &nbsp;&nbsp; [3-2. PCA 모델 구현](#-PCA-모델-구현)  
 
-&nbsp;&nbsp; [3-3. 실행 화면](#-실행-화면)  
+&nbsp;&nbsp; [3-3. OpenAI API 연동](#-OpenAI-API-연동)
+
+&nbsp;&nbsp; [3-4. 실행 화면](#-실행-화면)  
 
 <br>
 
@@ -157,7 +159,7 @@ PCA의 원리는 <strong>"PC1과 PC2만으로도 데이터의 큰 흐름을 이�
 
 <img src="./images/llm.png" width="720" alt="LLM" />
 
-- Pre-trained (사전학습) 모델 / Multimodal 모델 (텍스트+이미지+음성 처리) / Fine-tuning (특정 도메인 재학습) 
+- Pre-trained 모델 / Multimodal 모델 (텍스트+이미지+음성 처리) / Fine-tuning (특정 도메인 재학습) 
 
 - 최근에는 별도의 학습 환경을 구축하지 않아도, **API 형태**로 손쉽게 호출 가능하도록 서비스를 제공함
 
@@ -260,14 +262,15 @@ OpenAI API를 사용하기 위해 API Key를 발급받아 환경변수에 저장
 
 서버 실행 시 이 환경변수를 읽어와 WebClient 초기화에 사용함 <br>
 
+```
 ৹ OPENAI_API_KEY : 인증 토큰 <br>
 ৹ OPENAI_MODEL : gpt-4o-mini <br>
-
+```
 <br>
 
 2️⃣ **프롬프트 구성** <br>
 
-<img src="./images/prompt.png" width="900" alt="tlx 과정" />
+<img src="./images/prompt.png" width="900" alt="프롬프트" />
 
 <br>
 
@@ -291,4 +294,68 @@ LLM Service 클래스에서 OpenAI API 엔드포인트로 요청을 전송함 <b
 
 <br>
 
-sdsd
+### ◈ 코드 구조
+<br>
+
+**< 디렉터리 구조도 >**
+
+<img src="./images/directory.png" width="900" alt="디렉터리 구조도" />
+
+[🔗 메인 소스코드 바로가기](https://github.com/HyeJinSeok/2024-Graduation-Work/tree/main/src/main)
+
+<br>
+
+**< 클래스 다이어그램 >**
+
+<img src="./images/class_diagram.png" width="1000" alt="클래스 다이어그램" />
+
+<br>
+
+### ◈ PCA 모델 구현
+
+scikit-learn의 PCA 라이브러리를 활용하기 위해 **Python** 기반의 주피터 노트북(PCA.ipynb)을 작성함 <br>
+
+더미 데이터를 통해 사전학습시킨 PCA 모델의 평균(mu), 표준편차(sigma), 주성분 행렬(W)을 산출하여 <br>
+
+최종적으로 **pca_model.json**에 저장하고, 이를 Java 서버 측에서 활용함 <br>
+
+[🔗 PCA.ipynb 바로가기](https://github.com/HyeJinSeok/2024-Graduation-Work/blob/main/PCA.ipynb) 
+
+<br>
+
+**< PCA.ipynb 구현 흐름 >**
+```
+1. 합성 데이터 생성
+
+NASA-TLX 6축(mental, physical, temporal, performance, effort, frustration)을 기반으로 한 합성 데이터를 생성함
+
+일부 샘플에는 '시간 압박·노력 증가' 패턴과 '좌절·성과 압박 증가' 패턴을 섞어 실제 TLX 분포와 유사하게 설계함
+
+
+2. 8차원 특징 구성
+
+원본 6축 데이터를 바탕으로 OutcomePressure = 100 - Performance를 정의함
+
+편차 Δ6축 + 전반적 평균(tlx_mean) + stress 지표를 합쳐 8차원(feature) 입력 벡터를 만듦
+
+
+3. 표준화 및 PCA 학습
+
+각 축을 평균(mu)과 표준편차(sigma)로 표준화하여 분산을 맞춘 뒤, scikit-learn의 PCA를 적용해 8차원을 2차원으로 축소함
+
+PC1은 전반적 부담(tlx_mean)과 양(+) 상관, PC2는 시간·물리적 압박 축과 양(+) 상관이 되도록 부호를 의도적으로 정렬함
+
+
+4. 모델 파라미터 산출
+
+PCA 학습 결과에서 평균(mu), 표준편차(sigma), 주성분 행렬(W)을 추출함
+
+이 값들은 최종적으로 2차원 좌표(u, v)를 산출하기 위한 핵심 파라미터임
+
+
+5. JSON 파일 저장
+
+위의 파라미터들을 pca_model.json 파일로 내보냄
+
+서버 측 분석 모듈은 이 JSON을 로드하여 사용자의 TLX 입력을 (u, v) 좌표로 변환할 수 있음
+```
