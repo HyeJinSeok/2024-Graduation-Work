@@ -44,14 +44,19 @@
 
 <br>
 
-# 1. Introduction
-<img src="./images/title_line.png" width="1000" alt="." />
-
+<div id="user-content-toc">
+  <ul style="list-style: none;">
+    <summary>
+      <h1>1. Introduction</h1>
+      <img src="./images/title_line.png" width="1000" alt="." align="top"/>
+    </summary>
+  </ul>
+</div>
 
 <br>
 
 ## ◈ 기획 배경
-
+<br>
 
 <strong>인공지능(AI)</strong>이 기존의 컴퓨터공학과 비교했을 때 가장 두드러지는 차별점은 **정성적 신호를 정량화할 수 있다**라고 보았습니다. <br>
 
