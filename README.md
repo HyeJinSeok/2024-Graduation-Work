@@ -417,13 +417,13 @@ API Key를 코드에 직접 작성하지 않고, **IntelliJ IDEA 실행 환경**
 ## 3-4.&thinsp; 실행 화면
 
 
-### ① 전체 기본 화면
+## ① 전체 기본 화면
 
 <img src="./images/screen0.png" width="1000" alt="screen0" />
 
 <br>
 
-### ② 작업 유형 선택
+## ② 작업 유형 선택
 
 TLX 작업 부하에 대해 평가하기 전에, 어떤 작업에 대한 것인지 선택함 <br>
 
@@ -435,7 +435,7 @@ TLX 작업 부하에 대해 평가하기 전에, 어떤 작업에 대한 것인�
 
 <br>
 
-### ③ TLX 항목 평가
+## ③ TLX 항목 평가
 
 슬라이드 바를 움직여 0~100의 작업 부하도를 설정함
 
@@ -443,7 +443,7 @@ TLX 작업 부하에 대해 평가하기 전에, 어떤 작업에 대한 것인�
 
 <br>
 
-### ④ 분석 버튼 클릭 시 화면
+## ④ 분석 버튼 클릭 시 화면
 
 TLX 평균값과 Stress가 도출됨 <br>
 
@@ -455,7 +455,7 @@ TLX 평균값과 Stress가 도출됨 <br>
 
 <br>
 
-### ⑤ 조언 버튼 클릭 시 화면
+## ⑤ 조언 버튼 클릭 시 화면
 
 LLM 조언 칸에 OpenAI API를 통한 ChatGPT 모델 응답이 보여짐
 
@@ -463,7 +463,7 @@ LLM 조언 칸에 OpenAI API를 통한 ChatGPT 모델 응답이 보여짐
 
 <br>
 
-### ⑥ 조언 버튼 재클릭 시 
+## ⑥ 조언 버튼 재클릭 시 
 
 <img src="./images/screen5.png" width="200" alt="screen5" />
 
@@ -473,12 +473,14 @@ LLM 조언 칸에 OpenAI API를 통한 ChatGPT 모델 응답이 보여짐
 
 <br>
 
-### ⑦ API 응답 로그
+## ⑦ API 응답 로그
 
 OpenAI API 사이트에서 LLM 프롬프트 입력과 생성 결과에 대한 로그를 확인
 
 <img src="./images/screen7.png" width="1000" alt="screen7" />
 
-### ⑧ API 사용량 대시보드
+<br>
+
+## ⑧ API 사용량 대시보드
 
 <img src="./images/screen8.png" width="1000" alt="screen8" />
