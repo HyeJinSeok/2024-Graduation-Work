@@ -14,23 +14,33 @@
 
 #### [1. Introduction](#1-introduction)  
 &nbsp;&nbsp; [1-1.&thinsp; 기획 배경](#1-1-기획-배경)  
+
 &nbsp;&nbsp; [1-2.&thinsp; 설계 개요](#1-2-설계-개요)  
-&nbsp;&nbsp; [1-3.&thinsp; NASA TLX (Task Load Index)](#1-3-nasa-tlx-task-load-index)  
-&nbsp;&nbsp; [1-4.&thinsp; PCA (Principal Component Analysis)](#1-4-pca-principal-component-analysis)  
+
+&nbsp;&nbsp; [1-3.&thinsp; NASA TLX (Task Load Index)](#1-3-nasa-tlx-task-load-index) 
+
+&nbsp;&nbsp; [1-4.&thinsp; PCA (Principal Component Analysis)](#1-4-pca-principal-component-analysis)
+
 &nbsp;&nbsp; [1-5.&thinsp; LLM (Large Language Model)](#1-5-llm-large-language-model)  
 
 
 #### [2. Implementation](#2-implementation)  
 &nbsp;&nbsp; [2-1.&thinsp; 구현 요약](#2-1-구현-요약)  
+
 &nbsp;&nbsp; [2-2.&thinsp; PCA 모델 설계](#2-2-pca-모델-설계)  
+
 &nbsp;&nbsp; [2-3.&thinsp; TLX 입력 & 처리](#2-3-tlx-입력--처리)  
+
 &nbsp;&nbsp; [2-4.&thinsp; LLM 연동 & 조언 생성](#2-4-llm-연동--조언-생성)  
 
 
 #### [3. Results](#3-results)  
 &nbsp;&nbsp; [3-1.&thinsp; 코드 구조](#3-1-코드-구조)  
+
 &nbsp;&nbsp; [3-2.&thinsp; PCA 모델 구현](#3-2-pca-모델-구현)  
+
 &nbsp;&nbsp; [3-3.&thinsp; OpenAI API 연동](#3-3-openai-api-연동)  
+
 &nbsp;&nbsp; [3-4.&thinsp; 실행 화면](#3-4-실행-화면)  
 
 <br>
@@ -124,11 +134,11 @@
 
 주성분 분석(PCA)은 다차원 데이터의 차원을 축소시키면서, 데이터의 중요한 정보를 최대한 보존하는 통계 기법. <br>
 
-여기서 중요한 정보란 <strong>데이터들이 흩어져 있는 방향과 정도(=분산)</strong>를 뜻함 <br>
+여기서 중요한 정보란, <strong>데이터들이 흩어져 있는 방향과 정도(=분산)</strong>를 뜻함 <br>
 
 따라서 데이터가 가장 넓게 퍼져 있는 방향을 첫 번째 주성분(PC1) 으로 잡고, <br>
 
-PC1과 직교하면서 그다음으로 데이터가 퍼진 정도가 큰 방향을 두 번째 주성분(PC2)으로 잡음 <br>
+PC1과 직교하면서 그다음으로 분산도가 큰 방향을 두 번째 주성분(PC2)으로 잡음 <br>
 
 PCA의 원리는 <strong>"PC1과 PC2만으로도 데이터의 큰 흐름을 이해할 수 있다"</strong>이기 때문에  <br> 
 
@@ -173,7 +183,7 @@ PCA의 원리는 <strong>"PC1과 PC2만으로도 데이터의 큰 흐름을 이�
 > 이는 특정한 질문이 명확히 담겨 있지 않은 요청이라도, 요구사항(예: 톤, 길이, 표현 방식)을 전달하면 <br><br>
 > 그에 맞는 답을 생성할 수 있기에, LLM을 본 프로젝트의 **조언 제시 모듈**에 적용하고자 했습니다.
 
-<br><br>
+<br>
 
 <div id="user-content-toc">
   <ul style="list-style: none;">
@@ -295,7 +305,7 @@ LLM Service 클래스에서 OpenAI API 엔드포인트로 요청을 전송함 <b
 
 ### 4️⃣ 조언 결과 활용
 
-프론트엔드는 응답에서 LLM이 생성한 짧은 행동 지침 (advice)을 받아 표시함 <br>
+프론트엔드는 응답에서 LLM이 생성한 짧은 행동 지침 (advice)을 받아 표시함
 
 <br>
 
@@ -313,7 +323,7 @@ LLM Service 클래스에서 OpenAI API 엔드포인트로 요청을 전송함 <b
 ## 3-1.&thinsp; 코드 구조
 
 
-**< 디렉터리 구조도 >**
+### < 디렉터리 구조도 >
 
 <img src="./images/directory.png" width="900" alt="디렉터리 구조도" />
 
@@ -321,7 +331,7 @@ LLM Service 클래스에서 OpenAI API 엔드포인트로 요청을 전송함 <b
 
 <br>
 
-**< 클래스 다이어그램 >**
+### < 클래스 다이어그램 >
 
 <img src="./images/class_diagram.png" width="1000" alt="클래스 다이어그램" />
 
@@ -329,7 +339,7 @@ LLM Service 클래스에서 OpenAI API 엔드포인트로 요청을 전송함 <b
 
 ## 3-2.&thinsp; PCA 모델 구현
 
-scikit-learn의 PCA 라이브러리를 활용하기 위해 **Python** 기반의 주피터 노트북(PCA.ipynb)을 작성함 <br>
+**scikit-learn의 PCA 라이브러리**를 활용하기 위해 Python 기반의 주피터 노트북(PCA.ipynb)을 작성함 <br>
 
 더미 데이터를 통해 사전학습시킨 PCA 모델의 평균(mu), 표준편차(sigma), 주성분 행렬(W)을 산출하여 <br>
 
@@ -339,36 +349,36 @@ scikit-learn의 PCA 라이브러리를 활용하기 위해 **Python** 기반의 
 
 <br>
 
-**< PCA.ipynb 구현 흐름 >**
+### < PCA.ipynb 구현 흐름 >
 ```
 1. 합성 데이터 생성
 
 NASA-TLX 6축을 기반으로 한 합성 데이터를 생성함
 
 일부 샘플에는 '시간 압박·노력 증가' 패턴과 '좌절·성과 압박 증가' 패턴을 섞어 실제 TLX 분포와 유사하게 설계함
-
-
+```
+```
 2. 8차원 특징 구성
 
 원본 6축 데이터를 바탕으로 OutcomePressure = 100 - Performance를 정의함
 
 편차 Δ6축 + 전반적 평균(tlx_mean) + stress 지표를 합쳐 8차원(feature) 입력 벡터를 만듦
-
-
+```
+```
 3. 표준화 및 PCA 학습
 
 각 축을 평균(mu)과 표준편차(sigma)로 표준화해 분산을 맞춘 뒤, PCA를 적용해 8차원을 2차원으로 축소함
 
 PC1은 전반적 부담(tlx_mean)과 양(+) 상관, PC2는 시간·물리적 압박 축과 양(+) 상관이 되도록 부호를 정렬함
-
-
+```
+```
 4. 모델 파라미터 산출
 
 PCA 학습 결과에서 평균(mu), 표준편차(sigma), 주성분 행렬(W)을 추출함
 
 이 값들은 최종적으로 2차원 좌표(u, v)를 산출하기 위한 핵심 파라미터임
-
-
+```
+```
 5. JSON 파일 저장
 
 위의 파라미터들을 pca_model.json 파일로 내보냄
@@ -382,7 +392,7 @@ PCA 학습 결과에서 평균(mu), 표준편차(sigma), 주성분 행렬(W)을 
 
 OpenAI API를 사용하기 위해서는 **ChatGPT 유료 구독과 완전히 별개로**, 별도의 요금제를 끊어야 함 <br>
 
-[ 🔗 OpenAI API 공식 페이지 바로가기](https://openai.com/ko-KR/index/openai-api/) 
+[ 🔗 [참고] OpenAI API 공식 페이지 바로가기](https://openai.com/ko-KR/index/openai-api/) 
 
 <img src="./images/openai.png" width="1000" alt="openai_API" />
 
@@ -392,7 +402,7 @@ OpenAI API를 사용하기 위해서는 **ChatGPT 유료 구독과 완전히 별
 
 <br><br>
 
-API 키를 코드에 직접 작성하지 않고, **IntelliJ IDEA 실행 환경**에 환경변수로 등록함
+API Key를 코드에 직접 작성하지 않고, **IntelliJ IDEA 실행 환경**에 환경변수로 등록함
 
 <img src="./images/intelli.png" width="600" alt="intelliJ" />
 
