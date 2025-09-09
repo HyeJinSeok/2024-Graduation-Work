@@ -174,12 +174,12 @@ PCA의 원리는 <strong>"PC1과 PC2만으로도 데이터의 큰 흐름을 이�
 
 - Pre-trained 모델 / Multimodal 모델 (텍스트+이미지+음성 처리) / Fine-tuning (특정 도메인 재학습) 
 
-- 최근에는 별도의 학습 환경을 구축하지 않아도, **API 형태**로 손쉽게 호출 가능하도록 서비스를 제공함
+- 최근에는 별도의 학습 환경을 구축하지 않아도, **API 형태로 손쉽게 호출 가능**하도록 서비스를 제공함
 
 <br>
 
 > [!IMPORTANT]
-> LLM 모델에게 **답변의 요구사항**을 정의함으로써 원하는 형식의 결과를 얻을 수 있다는 점에 주목했습니다. <br><br>
+> LLM 모델에게 **답변의 요구사항을 정의함**으로써 원하는 형식의 결과를 얻을 수 있다는 점에 주목했습니다. <br><br>
 > 이는 특정한 질문이 명확히 담겨 있지 않은 요청이라도, 요구사항(예: 톤, 길이, 표현 방식)을 전달하면 <br><br>
 > 그에 맞는 답을 생성할 수 있기에, LLM을 본 프로젝트의 **조언 제시 모듈**에 적용하고자 했습니다.
 
@@ -271,11 +271,13 @@ PC1과 PC2를 각각 x축(u)과 y축(v)으로 잡으면, **모든 TLX 입력값�
 
 <img src="./images/tlx_process.png" width="1000" alt="tlx 과정" />
 
+> [!TIP]
+> 실제 구현에서는 NASA-TLX의 6개 항목만이 아니라, 추가적인 지표 2개(TLX Mean, Stress)를 포함시켜 <br><br> 총 8차원 벡터를 구성했습니다. ( Stress = 0.5 * Frustration + 0.3 * Temporal + 0.2 * Effort 로 정의 ) <br><br> TLX 6차원의 편차(Δ)를 벡터에 대입 시, 전체 TLX 수준의 크기가 반영되지 않기 때문입니다. <br><br> 따라서 상대적인 축 간 편차 뿐만 아니라 **절대적인 작업 강도**를 모두 반영할 수 있도록 설계하였습니다.
+
 <br>
 
 ## 2-4.&thinsp; LLM 연동 & 조언 생성
 
-<br>
 
 ### 1️⃣ 환경변수 설정
 
@@ -413,3 +415,70 @@ API Key를 코드에 직접 작성하지 않고, **IntelliJ IDEA 실행 환경**
 <br>
 
 ## 3-4.&thinsp; 실행 화면
+
+
+### ① 전체 기본 화면
+
+<img src="./images/screen0.png" width="1000" alt="screen0" />
+
+<br>
+
+### ② 작업 유형 선택
+
+TLX 작업 부하에 대해 평가하기 전에, 어떤 작업에 대한 것인지 선택함 <br>
+
+5가지 작업 유형 中 택 1: 회의 &thinsp;/ &thinsp;학습 &thinsp;/ &thinsp;창의 작업 &thinsp;/ &thinsp;운영·실무 &thinsp;/ &thinsp;행정·관리 <br>
+
+이 정보는 LLM 조언 생성 과정에서 **관련 주제로 서술**되도록 프롬프트에 반영됨
+
+<img src="./images/screen1.png" width="1000" alt="screen1" />
+
+<br>
+
+### ③ TLX 항목 평가
+
+슬라이드 바를 움직여 0~100의 작업 부하도를 설정함
+
+<img src="./images/screen2.png" width="1000" alt="screen2" />
+
+<br>
+
+### ④ 분석 버튼 클릭 시 화면
+
+TLX 평균값과 Stress가 도출됨 <br>
+
+우측 PCA 사분면에 (u,v) 좌표가 나타남 <br>
+
+사분면에 따른 조언 tone이 보여짐
+
+<img src="./images/screen3.png" width="1000" alt="screen3" />
+
+<br>
+
+### ⑤ 조언 버튼 클릭 시 화면
+
+LLM 조언 칸에 OpenAI API를 통한 ChatGPT 모델 응답이 보여짐
+
+<img src="./images/screen4.png" width="1000" alt="screen4" />
+
+<br>
+
+### ⑥ 조언 버튼 재클릭 시 
+
+<img src="./images/screen5.png" width="200" alt="screen5" />
+
+이전과 다른 LLM 결과가 도출됨
+
+<img src="./images/screen6.png" width="1000" alt="screen6" />
+
+<br>
+
+### ⑦ API 응답 로그
+
+OpenAI API 사이트에서 LLM 프롬프트 입력과 생성 결과에 대한 로그를 확인
+
+<img src="./images/screen7.png" width="1000" alt="screen7" />
+
+### ⑧ API 사용량 대시보드
+
+<img src="./images/screen8.png" width="1000" alt="screen8" />
